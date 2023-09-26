@@ -1,0 +1,8 @@
+CREATE TRIGGER `update_log` AFTER UPDATE ON `customer`
+ FOR EACH ROW INSERT INTO logs VALUES(null,new.name,new.eventid,'UPDATED',now())
+
+CREATE TRIGGER `delete_log` BEFORE DELETE ON `customer`
+ FOR EACH ROW INSERT INTO logs VALUES(null,old.name,old.eventid,'DELETED',now())
+
+CREATE TRIGGER `insert_log` AFTER INSERT ON `customer`
+ FOR EACH ROW INSERT INTO logs VALUES(null,new.name,new.eventid,'INSERTED',now())
